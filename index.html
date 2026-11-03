@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3.4 Angle Launched Projectiles with Trigonometry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--paper:#fff;--soft:#ececec;--muted:#555;color-scheme:light;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--ink:#f2f2f2;--paper:#161616;--soft:#2a2a2a;--muted:#b0b0b0;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;font-size:1.05rem;line-height:1.5}
+main{max-width:54rem;margin:0 auto;padding:1.5rem 1rem 4rem}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.15;margin:.2rem 0 .6rem}
+.lesson{margin:0;font-weight:700;color:var(--muted)}
+.intro{max-width:40rem;margin:0 0 1rem}
+.who{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:1rem 0 0}
+.who label{font-weight:700}
+.who input{width:12rem}
+svg{display:block;width:100%;height:auto}
+svg text{fill:var(--ink);font-family:inherit}
+.stroke{stroke:var(--ink);fill:none}
+.fillink{fill:var(--ink)}
+.flightwrap{border:2px solid var(--ink);padding:.5rem;margin-top:1rem}
+.flightwrap p{margin:.25rem .25rem 0;font-size:.9rem;color:var(--muted)}
+section.part{border:2px solid var(--ink);margin:2rem 0 0}
+section.part>h2{margin:0;padding:.5rem .9rem;background:var(--soft);border-bottom:2px solid var(--ink);font-size:1.15rem}
+.body{padding:.9rem}
+.body>p:first-child{margin-top:0}
+.tip{font-style:italic}
+.group{margin:.9rem 0 0;padding-top:.9rem;border-top:1px dashed var(--ink)}
+.group:first-of-type{border-top:0;padding-top:0}
+.group.locked{display:none}
+.steplabel{font-weight:700;margin:0 0 .4rem}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.4rem;margin:.4rem 0}
+.item{display:inline-flex;align-items:center;gap:.35rem;white-space:nowrap}
+.item::after{content:"";display:inline-block;width:1.2em;font-weight:700}
+.item.ok::after{content:"✓"}
+.item.bad::after{content:"✗"}
+input,select{font:inherit;color:var(--ink);background:var(--paper);border:2px dashed var(--ink);border-radius:0;padding:.2rem .4rem}
+input.n{width:6.5rem}
+.item.ok input,.item.ok select{border-style:solid}
+.item.bad input,.item.bad select{border-width:3px}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+button{font:inherit;font-weight:700;color:var(--paper);background:var(--ink);border:2px solid var(--ink);padding:.35rem 1rem;cursor:pointer;margin-top:.6rem}
+button:disabled{background:var(--paper);color:var(--ink);cursor:default}
+.fb p{margin:.4rem 0 0}
+.work{display:none;margin:.6rem 0 0;padding:.5rem .7rem;border:2px solid var(--ink)}
+.complete .work{display:block}
+.work p{margin:.15rem 0}
+.hv{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);margin:.8rem 0 0}
+.hv>div{padding:.6rem .7rem}
+.hv>div+div{border-left:2px solid var(--ink)}
+.hv .item{white-space:normal;flex-wrap:wrap}
+.hv h3{margin:0 0 .3rem;font-size:.95rem}
+.hv .wait{color:var(--muted);font-style:italic}
+@media (max-width:600px){.hv{grid-template-columns:1fr}.hv>div+div{border-left:0;border-top:2px solid var(--ink)}}
+.sides{display:grid;grid-template-columns:minmax(0,22rem) 1fr;gap:1rem;align-items:center}
+@media (max-width:600px){.sides{grid-template-columns:1fr}}
+.frac{display:inline-grid;text-align:center;vertical-align:middle;margin:0 .3rem}
+.frac>span:first-child{border-bottom:2px solid var(--ink);padding-bottom:.2rem;margin-bottom:.2rem}
+.eqs{display:flex;flex-wrap:wrap;gap:1rem 2.5rem;align-items:center}
+.eqs>div{display:flex;align-items:center;white-space:nowrap}
+.eqtable{width:100%;border-collapse:collapse;margin-top:.8rem}
+.eqtable td{border:2px solid var(--ink);padding:.5rem .7rem;text-align:center;width:50%;vertical-align:top}
+.eqtable th{border:2px solid var(--ink);background:var(--soft);padding:.35rem}
+.wrap-x{overflow-x:auto}
+#finish{border:3px solid var(--ink);margin:2rem 0 0;padding:1rem}
+#finish h2{margin:0 0 .4rem}
+#finish p{margin:.3rem 0}
+.vec{font-style:italic}
+sub{font-size:.7em}
+#fpath{stroke-dasharray:6 6;stroke-width:2.5}
+#fpath.done{stroke-dasharray:none}
+.hide{display:none}
+@media (prefers-reduced-motion:no-preference){.group.revealed{animation:in .3s ease-out}@keyframes in{from{opacity:0}to{opacity:1}}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="lesson">Lesson 3.4, TEKS P.5D</p>
+  <h1>Angle Launched Projectiles with Trigonometry</h1>
+  <p class="intro">Work each problem in your notebook first, then type your answers here to check them. Hit <b>Check</b> as often as you need, and the hints get more specific each time. The flight path below fills in as you solve.</p>
+  <div class="flightwrap">
+    <svg id="flight" viewBox="0 0 640 260" role="img" aria-label="Flight path of a projectile launched at 20 meters per second at 30 degrees">
+      <line class="stroke" x1="20" y1="200" x2="625" y2="200" stroke-width="2"/>
+      <path id="fpath" class="stroke" d=""/>
+      <line id="launchArrow" class="stroke" x1="40" y1="200" x2="40" y2="200" stroke-width="3" marker-end="url(#ah)"/>
+      <text x="48" y="226" font-size="15">20 m/s at 30°</text>
+      <g id="rangeDim">
+        <line class="stroke" x1="40" y1="242" x2="600" y2="242" stroke-width="1.5" stroke-dasharray="4 4" id="rangeLine"/>
+        <text id="rangeLbl" x="320" y="236" font-size="16" text-anchor="middle" font-weight="700">range = ?</text>
+      </g>
+      <line id="apexLine" class="stroke" x1="320" y1="200" x2="320" y2="70" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <text id="apexLbl" x="328" y="150" font-size="16" font-weight="700">max height = ?</text>
+      <text id="apexV" x="320" y="54" font-size="16" text-anchor="middle" font-weight="700">velocity at top = ?</text>
+      <g id="apexArrow" class="hide"><line class="stroke" x1="320" y1="70" x2="390" y2="70" stroke-width="3" marker-end="url(#ah)"/></g>
+      <circle id="landDot" class="fillink hide" cx="600" cy="200" r="5"/>
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fillink"/></marker></defs>
+    </svg>
+    <p>Vertical scale is stretched so you can see the arc. The real path is much flatter.</p>
+  </div>
+  <div class="who">
+    <div><label for="sname">Name</label> <input id="sname" autocomplete="name"></div>
+  </div>
+</header>
+
+<!-- PART 1: TRIG REVIEW -->
+<section class="part">
+  <h2>1. Trigonometry Review</h2>
+  <div class="body">
+    <div class="group" id="g-sides">
+      <p class="steplabel">Label each side of the triangle for the angle θ.</p>
+      <div class="sides">
+        <svg viewBox="0 0 320 220" role="img" aria-label="Right triangle. Side A is the slanted side, side B is the vertical side, side C is the bottom side. Angle theta is at the bottom left.">
+          <polygon class="stroke" points="30,190 280,190 280,30" stroke-width="3"/>
+          <polyline class="stroke" points="262,190 262,172 280,172" stroke-width="2"/>
+          <path class="stroke" d="M70,190 A40,40 0 0,0 64,169" stroke-width="2"/>
+          <text x="78" y="182" font-size="18" font-style="italic">θ</text>
+          <text x="130" y="100" font-size="18" font-weight="700">A</text>
+          <text x="292" y="116" font-size="18" font-weight="700">B</text>
+          <text x="150" y="214" font-size="18" font-weight="700">C</text>
+        </svg>
+        <div>
+          <div class="row"><span class="item" data-item="sideA"><label for="sideA">Side A (slanted):</label>
+            <select id="sideA"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span></div>
+          <div class="row"><span class="item" data-item="sideB"><label for="sideB">Side B (vertical):</label>
+            <select id="sideB"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span></div>
+          <div class="row"><span class="item" data-item="sideC"><label for="sideC">Side C (bottom):</label>
+            <select id="sideC"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span></div>
+        </div>
+      </div>
+      <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+    </div>
+
+    <div class="group" id="g-soh">
+      <p class="steplabel">SOH CAH TOA: finish each trig ratio.</p>
+      <div class="eqs">
+        <div>sin θ =<span class="frac"><span class="item" data-item="sinN"><select aria-label="sine numerator"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span><span class="item" data-item="sinD"><select aria-label="sine denominator"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span></span></div>
+        <div>cos θ =<span class="frac"><span class="item" data-item="cosN"><select aria-label="cosine numerator"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span><span class="item" data-item="cosD"><select aria-label="cosine denominator"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span></span></div>
+        <div>tan θ =<span class="frac"><span class="item" data-item="tanN"><select aria-label="tangent numerator"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span><span class="item" data-item="tanD"><select aria-label="tangent denominator"><option value="">choose…</option><option value="opp">opposite</option><option value="adj">adjacent</option><option value="hyp">hypotenuse</option></select></span></span></div>
+      </div>
+      <p class="tip">Watch out: your calculator needs to be in degree mode, not radian mode, for everything on this page.</p>
+      <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 2: COMPONENTS -->
+<section class="part">
+  <h2>2. Velocity Components Practice</h2>
+  <div class="body">
+    <p>A projectile is launched with a velocity of 40 m/s at an angle of 30° to the horizontal. Sketch the vector and its components in your notebook, then use trigonometry to find <span class="vec">v<sub>ix</sub></span> and <span class="vec">v<sub>iy</sub></span>.</p>
+    <div class="sides">
+      <svg viewBox="0 0 400 220" role="img" aria-label="40 meter per second velocity vector at 30 degrees with its horizontal and vertical components">
+        <line class="stroke" x1="30" y1="190" x2="272" y2="50" stroke-width="3" marker-end="url(#ah2)"/>
+        <line id="cx" class="stroke" x1="30" y1="190" x2="272" y2="190" stroke-width="2.5" stroke-dasharray="6 5"/>
+        <line id="cy" class="stroke" x1="272" y1="190" x2="272" y2="52" stroke-width="2.5" stroke-dasharray="6 5"/>
+        <path class="stroke" d="M80,190 A50,50 0 0,0 73,165" stroke-width="2"/>
+        <text x="86" y="182" font-size="15">30°</text>
+        <text x="60" y="96" font-size="16" font-weight="700">v<tspan font-size="11" dy="4">i</tspan><tspan dy="-4"> = 40 m/s</tspan></text>
+        <text id="cxl" x="150" y="212" font-size="16" text-anchor="middle">v<tspan font-size="11" dy="4">ix</tspan><tspan dy="-4"> = ?</tspan></text>
+        <text id="cyl" x="282" y="125" font-size="16">v<tspan font-size="11" dy="4">iy</tspan><tspan dy="-4"> = ?</tspan></text>
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="fillink"/></marker></defs>
+      </svg>
+      <div class="group" id="g-comp">
+        <div class="row"><span class="item" data-item="viyFn"><label for="viyFn"><span class="vec">v<sub>iy</sub></span> uses</label>
+          <select id="viyFn"><option value="">choose…</option><option value="sin">sine</option><option value="cos">cosine</option><option value="tan">tangent</option></select></span></div>
+        <div class="row"><span class="item" data-item="viy"><label for="viy"><span class="vec">v<sub>iy</sub></span> =</label> <input id="viy" class="n" inputmode="decimal"> m/s</span></div>
+        <div class="row"><span class="item" data-item="vixFn"><label for="vixFn"><span class="vec">v<sub>ix</sub></span> uses</label>
+          <select id="vixFn"><option value="">choose…</option><option value="sin">sine</option><option value="cos">cosine</option><option value="tan">tangent</option></select></span></div>
+        <div class="row"><span class="item" data-item="vix"><label for="vix"><span class="vec">v<sub>ix</sub></span> =</label> <input id="vix" class="n" inputmode="decimal"> m/s</span></div>
+        <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+        <div class="work"><p>sin(30°) = <i>v<sub>iy</sub></i> / 40 → <i>v<sub>iy</sub></i> = 40 sin(30°) = 20.0 m/s</p><p>cos(30°) = <i>v<sub>ix</sub></i> / 40 → <i>v<sub>ix</sub></i> = 40 cos(30°) = 34.64 m/s</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 3: TWO DIRECTIONS -->
+<section class="part">
+  <h2>3. Motion in Two Directions</h2>
+  <div class="body">
+    <div class="group" id="g-fill">
+      <div class="hv">
+        <div><h3>Horizontal direction</h3>
+          <div class="row"><span class="item" data-item="hv">Horizontal velocity is <select aria-label="horizontal velocity is"><option value="">choose…</option><option value="up">speeding up</option><option value="const">constant</option><option value="down">slowing down</option><option value="zero">zero</option></select>.</span></div>
+          <div class="row"><span class="item" data-item="ha">Horizontal acceleration is <select aria-label="horizontal acceleration is"><option value="">choose…</option><option value="g">9.8 m/s² down</option><option value="zero">zero</option><option value="launch">the launch speed</option></select>.</span></div>
+        </div>
+        <div><h3>Vertical direction</h3>
+          <div class="row"><span class="item" data-item="vg">Vertical <select aria-label="vertical blank is caused by gravity"><option value="">choose…</option><option value="dist">distance</option><option value="vel">velocity</option><option value="acc">acceleration</option></select> is caused by gravity.</span></div>
+          <div class="row"><span class="item" data-item="vz">Vertical velocity is zero at <select aria-label="vertical velocity is zero at"><option value="">choose…</option><option value="launch">launch</option><option value="max">maximum height</option><option value="land">landing</option><option value="all">every point</option></select>.</span></div>
+        </div>
+      </div>
+      <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+    </div>
+    <div class="wrap-x">
+      <table class="eqtable">
+        <tr><th>Horizontal equations</th><th>Vertical equations</th></tr>
+        <tr><td><i>a<sub>x</sub></i> = 0 m/s²<br><i>v<sub>ix</sub></i> = <i>v<sub>i</sub></i> cos θ<br>Δ<i>x</i> = <i>v<sub>ix</sub>t</i> + ½<i>a<sub>x</sub>t</i>²<br><i>v<sub>fx</sub></i> = <i>v<sub>ix</sub></i> + <i>a<sub>x</sub>t</i><br><i>v<sub>fx</sub></i>² = <i>v<sub>ix</sub></i>² + 2<i>a<sub>x</sub></i>Δ<i>x</i></td>
+            <td><i>a<sub>y</sub></i> = −9.8 m/s²<br><i>v<sub>iy</sub></i> = <i>v<sub>i</sub></i> sin θ<br>Δ<i>y</i> = <i>v<sub>iy</sub>t</i> + ½<i>a<sub>y</sub>t</i>²<br><i>v<sub>fy</sub></i> = <i>v<sub>iy</sub></i> + <i>a<sub>y</sub>t</i><br><i>v<sub>fy</sub></i>² = <i>v<sub>iy</sub></i>² + 2<i>a<sub>y</sub></i>Δ<i>y</i></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PART 4: RANGE EXAMPLE -->
+<section class="part">
+  <h2>4. Range Example</h2>
+  <div class="body">
+    <p>A projectile is launched with an initial velocity of 20 m/s at an angle of 30° to the horizontal. Calculate the horizontal range of the projectile if it lands at the same height from which it was launched.</p>
+    <p class="tip">Watch out: horizontal and vertical get solved separately. The only thing they share is time.</p>
+
+    <div class="group" id="r1">
+      <p class="steplabel">Step 1 of 4: List what you know in each direction.</p>
+      <div class="hv">
+        <div><h3>Horizontal</h3>
+          <div class="row"><span class="item" data-item="r_ax"><label for="r_ax"><i>a<sub>x</sub></i> =</label> <input id="r_ax" class="n" inputmode="decimal"> m/s²</span></div>
+          <div class="row"><span class="item" data-item="r_vix"><label for="r_vix"><i>v<sub>ix</sub></i> =</label> <input id="r_vix" class="n" inputmode="decimal"> m/s</span></div></div>
+        <div><h3>Vertical</h3>
+          <div class="row"><span class="item" data-item="r_ay"><label for="r_ay"><i>a<sub>y</sub></i> =</label> <input id="r_ay" class="n" inputmode="decimal"> m/s²</span></div>
+          <div class="row"><span class="item" data-item="r_viy"><label for="r_viy"><i>v<sub>iy</sub></i> =</label> <input id="r_viy" class="n" inputmode="decimal"> m/s</span></div></div>
+      </div>
+      <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+      <div class="work"><p><i>a<sub>x</sub></i> = 0 m/s², &nbsp; <i>v<sub>ix</sub></i> = 20 cos(30°) = 17.32 m/s</p><p><i>a<sub>y</sub></i> = −9.8 m/s², &nbsp; <i>v<sub>iy</sub></i> = 20 sin(30°) = 10.0 m/s</p></div>
+    </div>
+
+    <div class="group locked" id="r2">
+      <p class="steplabel">Step 2 of 4: What’s missing?</p>
+      <div class="hv">
+        <div><h3>Horizontal</h3>
+          <div class="row"><label for="r_ready">Can you find the range yet?</label></div>
+          <div class="row"><span class="item" data-item="r_ready2"><select id="r_ready" aria-label="Can you find the range yet"><option value="">choose…</option><option value="yes">Yes, we have everything</option><option value="time">No, we need the time</option><option value="height">No, we need the max height</option></select></span></div></div>
+        <div><h3>Vertical</h3>
+          <p style="margin:0">It lands at the same height it launched from. What’s its vertical velocity the instant it lands?</p>
+          <div class="row"><span class="item" data-item="r_vfy"><label for="r_vfy"><i>v<sub>fy</sub></i> =</label> <input id="r_vfy" class="n" inputmode="decimal"> m/s</span></div></div>
+      </div>
+      <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+      <div class="work"><p>Horizontal: can’t find the range yet, because we need the time.</p><p>Vertical: <i>v<sub>fy</sub></i> = −10 m/s (same speed, but now going down)</p></div>
+    </div>
+
+    <div class="group locked" id="r3">
+      <p class="steplabel">Step 3 of 4: Use the vertical direction to find the time in the air.</p>
+      <div class="hv">
+        <div><h3>Horizontal</h3><p class="wait">Waiting on the time…</p></div>
+        <div><h3>Vertical</h3>
+          <div class="row"><span class="item" data-item="r_eq"><select aria-label="which equation"><option value="">choose an equation…</option><option value="v2">vfy² = viy² + 2ayΔy</option><option value="vf">vfy = viy + ay·t</option><option value="dy">Δy = viy·t + ½ay·t²</option></select></span></div>
+          <div class="row"><span class="item" data-item="r_t"><label for="r_t"><i>t</i> =</label> <input id="r_t" class="n" inputmode="decimal"> s</span></div></div>
+      </div>
+      <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+      <div class="work"><p><i>v<sub>fy</sub></i> = <i>v<sub>iy</sub></i> + <i>a<sub>y</sub>t</i></p><p>−10 = 10 + (−9.8)<i>t</i></p><p>−20 = (−9.8)<i>t</i></p><p><i>t</i> = 2.04 s</p></div>
+    </div>
+
+    <div class="group locked" id="r4">
+      <p class="steplabel">Step 4 of 4: Now use that time in the horizontal direction.</p>
+      <div class="hv">
+        <div><h3>Horizontal</h3>
+          <div class="row"><span class="item" data-item="r_dx"><label for="r_dx">Δ<i>x</i> =</label> <input id="r_dx" class="n" inputmode="decimal"> m</span></div></div>
+        <div><h3>Vertical</h3><p class="wait">Done: <i>t</i> = 2.04 s</p></div>
+      </div>
+      <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+      <div class="work"><p>Δ<i>x</i> = <i>v<sub>ix</sub>t</i> + ½<i>a<sub>x</sub>t</i>²</p><p>Δ<i>x</i> = (17.32)(2.04) + ½(0)(2.04)²</p><p>Δ<i>x</i> = 35.3 + 0 = 35.3 m</p><p class="tip">Since <i>a<sub>x</sub></i> = 0, that second term always drops out. This is just Δ<i>x</i> = <i>vt</i> from constant-velocity motion.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 5: MAX HEIGHT -->
+<section class="part">
+  <h2>5. Maximum Height On Your Own</h2>
+  <div class="body">
+    <p>A projectile is launched at 20 m/s at an angle of 30° to the horizontal. What is the maximum height of the projectile and its velocity at that location?</p>
+    <p class="tip">This is the same launch as the range example, so you already have the components. Solve it fully in your notebook before checking.</p>
+    <div class="group" id="m1">
+      <div class="hv">
+        <div><h3>Horizontal</h3>
+          <div class="row"><span class="item" data-item="m_v"><label for="m_v">Velocity at max height =</label> <input id="m_v" class="n" inputmode="decimal"> m/s</span></div>
+          <div class="row"><span class="item" data-item="m_dir"><label for="m_dir">Direction:</label> <select id="m_dir"><option value="">choose…</option><option value="up">straight up</option><option value="horiz">horizontal (forward)</option><option value="angle">30° above horizontal</option><option value="none">it isn’t moving</option></select></span></div></div>
+        <div><h3>Vertical</h3>
+          <div class="row"><span class="item" data-item="m_vfy"><label for="m_vfy"><i>v<sub>fy</sub></i> at the top =</label> <input id="m_vfy" class="n" inputmode="decimal"> m/s</span></div>
+          <div class="row"><span class="item" data-item="m_dy"><label for="m_dy">Max height Δ<i>y</i> =</label> <input id="m_dy" class="n" inputmode="decimal"> m</span></div></div>
+      </div>
+      <button class="check">Check</button><div class="fb" aria-live="polite"></div>
+      <div class="work">
+        <p><b>Horizontal:</b> <i>a<sub>x</sub></i> = 0, so velocity stays constant. At the top it’s only moving horizontally: <i>v<sub>fx</sub></i> = 17.32 + (0)<i>t</i> = 17.32 m/s.</p>
+        <p><b>Vertical:</b> <i>v<sub>fy</sub></i>² = <i>v<sub>iy</sub></i>² + 2<i>a<sub>y</sub></i>Δ<i>y</i> → 0² = 10² + 2(−9.8)Δ<i>y</i> → −100 = (−19.6)Δ<i>y</i> → Δ<i>y</i> = 5.10 m</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="finish" aria-live="polite">
+  <h2 id="finTitle">Progress</h2>
+  <p id="finCount"></p>
+  <p id="finScore"></p>
+  <p id="finStamp"></p>
+</section>
+</main>
+
+<script>
+(function(){
+// ---------- helpers ----------
+function num(s){
+  s=String(s||'').trim().replace(/[\u2212\u2013\u2014]/g,'-').replace(/,/g,'');
+  s=s.replace(/\s*(m\/s\u00b2|m\/s\^2|m\/s2|m\/s|m|s)$/i,'').trim();
+  if(s===''||s==='-'||s==='.') return NaN;
+  return Number(s);
+}
+function near(v,t,rel){rel=rel||0.015;return Math.abs(v-t)<=Math.max(0.02,Math.abs(t)*rel);}
+var DEG='Your calculator looks like it’s in radian mode. Switch it to degree mode and try again.';
+
+// ---------- item definitions ----------
+var sideHints=['Start with the right-angle box: the side across from it is the hypotenuse. Next, find the side that doesn’t touch θ at all.'];
+var I={
+  sideA:{label:'Side A',ans:'hyp',why:function(v){return {opp:'Side A touches θ, so it can’t be opposite.',adj:'Side A touches θ, but it’s also across from the right angle. That makes it…?'}[v];},hints:sideHints},
+  sideB:{label:'Side B',ans:'opp',why:function(v){return {adj:'Adjacent sides touch θ. Does Side B touch θ?',hyp:'The hypotenuse is across from the right angle, and Side B touches the right angle.'}[v];},hints:sideHints},
+  sideC:{label:'Side C',ans:'adj',why:function(v){return {opp:'Side C touches θ, so it can’t be opposite.',hyp:'The hypotenuse is the longest side, across from the right angle. Side C touches the right angle.'}[v];},hints:sideHints},
+  sinN:{label:'sin θ top',ans:'opp',hints:['SOH: Sine = Opposite / Hypotenuse.']},
+  sinD:{label:'sin θ bottom',ans:'hyp',hints:['SOH: Sine = Opposite / Hypotenuse.']},
+  cosN:{label:'cos θ top',ans:'adj',hints:['CAH: Cosine = Adjacent / Hypotenuse.']},
+  cosD:{label:'cos θ bottom',ans:'hyp',hints:['CAH: Cosine = Adjacent / Hypotenuse.']},
+  tanN:{label:'tan θ top',ans:'opp',hints:['TOA: Tangent = Opposite / Adjacent.']},
+  tanD:{label:'tan θ bottom',ans:'adj',hints:['TOA: Tangent = Opposite / Adjacent.']},
+
+  viyFn:{label:'viy function',ans:'sin',hints:['viy is the vertical side, across from the 30° angle (opposite). You know the hypotenuse (40 m/s). Opposite and hypotenuse means…SOH.']},
+  viy:{label:'viy',num:1,ans:20,why:function(v){
+      if(near(v,34.64))return 'That’s the horizontal component. The vertical side is opposite the angle, so use sine.';
+      if(near(v,-39.52))return DEG;
+      if(near(v,0.5))return 'You found sin(30°). Now multiply by the 40 m/s hypotenuse.';
+      if(near(v,23.09))return 'That’s tangent. You know the hypotenuse, not the adjacent side, so tangent isn’t the one.';
+      if(Math.abs(v)>40)return 'A component can’t be bigger than the original 40 m/s. The hypotenuse is always the longest side.';},
+    hints:['sin(30°) = viy / 40, so multiply both sides by 40.','viy = 40 × sin(30°)']},
+  vixFn:{label:'vix function',ans:'cos',hints:['vix is the bottom side, touching the 30° angle (adjacent). Adjacent and hypotenuse means…CAH.']},
+  vix:{label:'vix',num:1,ans:34.64,why:function(v){
+      if(near(v,20))return 'That’s the vertical component. The horizontal side is adjacent to the angle, so use cosine.';
+      if(near(v,6.17))return DEG;
+      if(near(v,0.866))return 'You found cos(30°). Now multiply by the 40 m/s hypotenuse.';
+      if(Math.abs(v)>40)return 'A component can’t be bigger than the original 40 m/s.';},
+    hints:['cos(30°) = vix / 40, so multiply both sides by 40.','vix = 40 × cos(30°)']},
+
+  hv:{label:'Horizontal velocity',ans:'const',hints:['Once it’s launched, nothing pushes it forward or backward (we’re ignoring air). So what happens to its horizontal motion?']},
+  ha:{label:'Horizontal acceleration',ans:'zero',why:function(v){if(v==='g')return 'Gravity pulls down, not sideways. That 9.8 belongs in the vertical column.';},hints:['If horizontal velocity never changes, what’s the acceleration in that direction?']},
+  vg:{label:'Vertical ___ caused by gravity',ans:'acc',hints:['Gravity changes the vertical velocity by the same amount every second. What do we call a steady change in velocity?']},
+  vz:{label:'Vertical velocity zero at',ans:'max',why:function(v){if(v==='land')return 'At landing it’s moving down fast. Where does it stop rising and start falling?';},hints:['Picture the exact instant it switches from going up to coming down.']},
+
+  r_ax:{label:'ax',num:1,ans:0,hints:['Look at your horizontal equations column. What’s the first line?']},
+  r_vix:{label:'vix',num:1,ans:17.32,why:function(v){
+      if(near(v,10))return 'That’s the vertical component. Horizontal uses cosine.';
+      if(near(v,3.09))return DEG;
+      if(near(v,34.64))return 'That’s from the 40 m/s problem. This launch is 20 m/s.';},
+    hints:['vix = vi cos θ = 20 cos(30°)']},
+  r_ay:{label:'ay',num:1,ans:-9.8,tol:0.01,why:function(v){if(near(v,9.8))return 'Right size, but gravity pulls down. In this course, down is negative.';},hints:['Gravity is the only thing acting vertically. Check your vertical equations column.']},
+  r_viy:{label:'viy',num:1,ans:10,why:function(v){
+      if(near(v,17.32))return 'That’s the horizontal component. Vertical uses sine.';
+      if(near(v,-19.76))return DEG;
+      if(near(v,20))return 'That’s the full launch speed. You need just the vertical part.';},
+    hints:['viy = vi sin θ = 20 sin(30°)']},
+
+  r_ready:{label:'Ready for range?',ans:'time',el:'r_ready2',why:function(v){
+      if(v==='yes')return 'Look at Δx = vix·t + ½ax·t². Which value in there don’t you have yet?';
+      if(v==='height')return 'Max height doesn’t show up in the horizontal equation. Look at Δx = vix·t + ½ax·t² again.';},hints:['Look at Δx = vix·t + ½ax·t². What’s still unknown besides Δx?']},
+  r_vfy:{label:'vfy',num:1,ans:-10,why:function(v){
+      if(near(v,10))return 'Right speed, but it’s falling when it lands. What sign does downward get?';
+      if(near(v,0))return 'Vertical velocity is zero at the top, not at landing.';},
+    hints:['It lands at the same height it launched from, so it comes down with the same vertical speed it went up with.']},
+
+  r_eq:{label:'Equation',ans:['vf','dy'],why:function(v){if(v==='v2')return 'That one has no t in it, so it can’t give you time.';},
+    okMsg:function(v){if(v==='dy')return 'That works too, since Δy = 0 when it lands at launch height. The worked steps below use the other one.';},
+    hints:['You need an equation that contains t, using values you already know: viy, vfy, and ay.']},
+  r_t:{label:'t',num:1,ans:2.04,tol:0.01,why:function(v){
+      if(near(v,-2.04,0.01))return 'Time can’t be negative. Recheck your signs: vfy is −10 and ay is −9.8.';
+      if(near(v,1.02,0.02))return 'That’s the time to reach the top. The whole flight up and back down takes twice as long.';
+      if(near(v,0))return 'If vfy came out as +10, the equation says no time passed. vfy should be −10.';},
+    hints:['−10 = 10 + (−9.8)t. Subtract 10 from both sides first.','−20 = (−9.8)t. Now divide both sides by −9.8.']},
+
+  r_dx:{label:'Δx',num:1,ans:35.3,why:function(v){
+      if(near(v,40.8,0.02))return 'Looks like you used the full 20 m/s. Only the horizontal component carries it forward.';
+      if(near(v,20.4,0.02))return 'Looks like you used viy. Horizontal distance needs the horizontal velocity.';
+      if(near(v,17.7,0.02))return 'Looks like you used the time to the top. Use the whole flight time, 2.04 s.';},
+    hints:['Δx = vix·t + ½(0)t². The second term drops out because ax = 0.','Δx = (17.32)(2.04)']},
+
+  m_vfy:{label:'vfy at the top',num:1,ans:0,hints:['What’s true about vertical velocity at the exact top of the arc? Check Part 3.']},
+  m_dy:{label:'Max height',num:1,ans:5.10,why:function(v){
+      if(near(v,10.2))return 'Looks like the 2 in 2ayΔy went missing.';
+      if(near(v,-5.10))return 'Check your signs. Height above the launch point should come out positive.';
+      if(near(v,0.51,0.03))return 'Did you square viy? It’s 10² = 100.';
+      if(near(v,20.4,0.02))return 'Looks like you used 20 m/s. Only the vertical component, viy = 10 m/s, matters for height.';
+      if(near(v,15.3))return 'Looks like you used 17.32 m/s. Height only depends on viy = 10 m/s.';},
+    hints:['Use vfy² = viy² + 2ayΔy, with vfy = 0 at the top.','0² = 10² + 2(−9.8)Δy, so −100 = (−19.6)Δy.']},
+  m_v:{label:'Velocity at the top',num:1,ans:17.32,why:function(v){
+      if(near(v,0))return 'Only the vertical velocity is zero at the top. Is it still moving forward?';
+      if(near(v,20))return 'That’s the launch speed. At the top, one component is gone.';
+      if(near(v,10))return 'That’s viy, and the vertical part is zero at the top.';},
+    hints:['At the top vfy = 0, so the only velocity left is the horizontal part. Does horizontal velocity ever change?']},
+  m_dir:{label:'Direction at the top',ans:'horiz',why:function(v){if(v==='none')return 'It stops rising, but it never stops moving forward.';},hints:['At the top vfy = 0. What direction is the only velocity left pointing?']}
+};
+
+var G=[
+  {id:'g-sides',items:['sideA','sideB','sideC']},
+  {id:'g-soh',items:['sinN','sinD','cosN','cosD','tanN','tanD']},
+  {id:'g-comp',items:['viyFn','viy','vixFn','vix'],done:drawComponents},
+  {id:'g-fill',items:['hv','ha','vg','vz']},
+  {id:'r1',items:['r_ax','r_vix','r_ay','r_viy'],next:'r2'},
+  {id:'r2',items:['r_ready','r_vfy'],next:'r3'},
+  {id:'r3',items:['r_eq','r_t'],next:'r4'},
+  {id:'r4',items:['r_dx'],done:flightRange},
+  {id:'m1',items:['m_vfy','m_dy','m_v','m_dir'],done:flightApex}
+];
+var GM={};G.forEach(function(g){GM[g.id]=g;});
+Object.keys(I).forEach(function(k){I[k].att=0;I[k].ok=false;I[k].first=false;});
+
+function wrapOf(id){return document.querySelector('[data-item="'+(I[id].el||id)+'"]');}
+function ctrl(id){return wrapOf(id).querySelector('input,select');}
+
+function checkItem(id){
+  var it=I[id],w=wrapOf(id),c=ctrl(id);
+  if(it.ok) return {state:'ok'};
+  var raw=c.value, ok, v;
+  if(raw.trim()==='') return {state:'empty'};
+  if(it.num){
+    v=num(raw);
+    if(isNaN(v)){w.className='item bad';return {state:'bad',msg:'That doesn’t look like a number. Type just the number, like 12.5 (units are optional).'};}
+    ok=near(v,it.ans,it.tol);
+  } else {
+    v=raw; ok=Array.isArray(it.ans)?it.ans.indexOf(v)>=0:v===it.ans;
+  }
+  it.att++;
+  if(ok){
+    it.ok=true; it.first=(it.att===1); w.className='item ok';
+    if(c.tagName==='SELECT') c.disabled=true; else c.readOnly=true;
+    return {state:'ok',msg:it.okMsg?it.okMsg(v):null};
+  }
+  w.className='item bad';
+  var msg=(it.why&&it.why(v))||it.hints[Math.min(it.att-1,it.hints.length-1)];
+  if(it.att>=3&&it.hints.length>1&&!(it.why&&it.why(v))) msg=it.hints[it.hints.length-1];
+  return {state:'bad',msg:msg};
+}
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+function checkGroup(gid){
+  var g=GM[gid]; if(g.complete) return;
+  var box=document.getElementById(gid),fb=box.querySelector('.fb'),lines=[],all=true;
+  g.items.forEach(function(id){
+    var r=checkItem(id),lab=I[id].label;
+    if(r.state==='empty'){all=false;lines.push('✗ <b>'+esc(lab)+':</b> fill this in first.');}
+    else if(r.state==='bad'){all=false;lines.push('✗ <b>'+esc(lab)+':</b> '+esc(r.msg));}
+    else if(r.msg){lines.push('✓ <b>'+esc(lab)+':</b> '+esc(r.msg));}
+  });
+  if(all){
+    g.complete=true; box.classList.add('complete');
+    lines.unshift('✓ <b>All correct.</b>'+(box.querySelector('.work')?' Compare your notebook work to the steps below.':''));
+    var b=box.querySelector('.check'); b.disabled=true; b.textContent='Checked ✓';
+    if(g.next){var n=document.getElementById(g.next);n.classList.remove('locked');n.classList.add('revealed');var f=n.querySelector('input,select');if(f)f.focus({preventScroll:true});}
+    if(g.done) g.done();
+    progress();
+  }
+  fb.innerHTML=lines.map(function(l){return '<p>'+l+'</p>';}).join('');
+}
+
+G.forEach(function(g){
+  var box=document.getElementById(g.id);
+  box.querySelector('.check').addEventListener('click',function(){checkGroup(g.id);});
+  box.querySelectorAll('input').forEach(function(inp){
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();checkGroup(g.id);}});
+  });
+});
+
+// ---------- drawings ----------
+function setText(id,txt){document.getElementById(id).lastElementChild.textContent=txt;}
+function drawComponents(){
+  document.getElementById('cx').removeAttribute('stroke-dasharray');
+  document.getElementById('cy').removeAttribute('stroke-dasharray');
+  setText('cxl',' = 34.64 m/s'); setText('cyl',' = 20.0 m/s');
+}
+var F={ox:40,oy:200,sx:560/35.35,sy:130/5.102};
+function px(x){return F.ox+x*F.sx;} function py(y){return F.oy-y*F.sy;}
+(function(){
+  var d='',T=2.0408;
+  for(var i=0;i<=80;i++){var t=T*i/80,x=17.32*t,y=10*t-4.9*t*t;d+=(i?'L':'M')+px(x).toFixed(1)+','+py(y).toFixed(1);}
+  document.getElementById('fpath').setAttribute('d',d);
+  var t2=0.12,ax=px(17.32*t2),ay=py(10*t2-4.9*t2*t2);
+  var a=document.getElementById('launchArrow');a.setAttribute('x2',(F.ox+(ax-F.ox)*2.4).toFixed(1));a.setAttribute('y2',(F.oy+(ay-F.oy)*2.4).toFixed(1));
+  document.getElementById('apexLine').setAttribute('y2',py(5.102).toFixed(1));
+})();
+function flightRange(){
+  document.getElementById('fpath').classList.add('done');
+  document.getElementById('rangeLine').removeAttribute('stroke-dasharray');
+  document.getElementById('rangeLbl').textContent='range Δx = 35.3 m';
+  document.getElementById('landDot').classList.remove('hide');
+}
+function flightApex(){
+  document.getElementById('apexLine').removeAttribute('stroke-dasharray');
+  document.getElementById('apexLbl').textContent='max height = 5.10 m';
+  document.getElementById('apexV').textContent='v = 17.3 m/s, horizontal';
+  document.getElementById('apexArrow').classList.remove('hide');
+}
+
+// ---------- progress ----------
+function progress(){
+  var done=G.filter(function(g){return g.complete;}).length;
+  var keys=Object.keys(I),first=keys.filter(function(k){return I[k].first;}).length;
+  var nm=document.getElementById('sname').value.trim();
+  document.getElementById('finCount').textContent=done+' of '+G.length+' checks complete.';
+  document.getElementById('finScore').textContent=done?('Correct on the first try: '+first+' of '+keys.length+' answers.'):'';
+  if(done===G.length){
+    document.getElementById('finTitle').textContent='✓ Activity complete'+(nm?', '+nm:'');
+    document.getElementById('finStamp').textContent='Finished '+new Date().toLocaleString()+'. Screenshot this box and turn it in.';
+  }
+}
+document.getElementById('sname').addEventListener('input',progress);
+progress();
+})();
+</script>
+</body>
+</html>
